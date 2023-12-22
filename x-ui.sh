@@ -31,20 +31,18 @@ else
 fi
 echo "架构: ${arch}"
 
-last_version=$(curl -Ls "https://api.github.com/repos/qist/xray-ui/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+last_version=$(curl -Ls "https://api.github.com/repos/4xmen/radepa-x-ui/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
 if [[ -z "$last_version" ]]; then
     red "检测 x-ui 版本失败，可能是超出 Github API 限制，正在使用备用源检测最新版本"
-    last_version=$(curl -sm8 https://github.com/qist/xray-ui/raw/main/config/version)
+    last_version=$(curl -sm8 https://github.com/4xmen/radepa-x-ui/raw/main/config/version)
     if [[ -z "$last_version" ]]; then
         red "检测 x-ui 版本失败，请确保你的服务器能够连接 Github 服务"
-        rm -f install.sh
         exit 1
     fi
 fi
 echo -e "${yellow}检测到 x-ui 最新版本：${last_version}，开始安装${plain}"
-curl -Ls https://github.com/qist/xray-ui/releases/download/${last_version}/xray-ui-linux-${arch}.tar.gz -o x-ui-linux-${arch}.tar.gz
+curl -Ls https://github.com/4xmen/radepa-x-ui/releases/download/${last_version}/x-ui-linux-${arch}.tar.gz -o x-ui-linux-${arch}.tar.gz
 tar zxvf x-ui-linux-${arch}.tar.gz -C /usr/local && rm x-ui-linux-${arch}.tar.gz -rf
-mv /usr/local/xray-ui /usr/local/x-ui && mv /usr/local/x-ui/xray-ui /usr/local/x-ui/x-ui 
 chmod +x /usr/local/x-ui/x-ui /usr/local/x-ui/bin/xray-linux-*
 
 echo "安装Alpine所需文件"
