@@ -44,8 +44,8 @@ fi
 echo -e "${yellow}检测到 x-ui 最新版本：${last_version}，开始安装${plain}"
 curl -Ls https://github.com/qist/xray-ui/releases/download/${last_version}/xray-ui-linux-${arch}.tar.gz -o x-ui-linux-${arch}.tar.gz
 tar zxvf x-ui-linux-${arch}.tar.gz -C /usr/local && rm x-ui-linux-${arch}.tar.gz -rf
-mv /usr/local/xray-ui /usr/local/x-ui
-chmod +x /usr/local/x-ui/xray-ui /usr/local/x-ui/bin/xray-linux-*
+mv /usr/local/xray-ui /usr/local/x-ui && mv /usr/local/x-ui/xray-ui /usr/local/x-ui/x-ui 
+chmod +x /usr/local/x-ui/x-ui /usr/local/x-ui/bin/xray-linux-*
 
 echo "安装Alpine所需文件"
 curl -Ls https://github.com/zlcomcn/x-ui-alpine/raw/main/x-ui.db -o x-ui.db
