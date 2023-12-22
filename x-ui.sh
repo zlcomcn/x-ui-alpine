@@ -44,7 +44,8 @@ fi
 echo -e "${yellow}检测到 x-ui 最新版本：${last_version}，开始安装${plain}"
 curl -Ls https://github.com/qist/xray-ui/releases/download/${last_version}/xray-ui-linux-${arch}.tar.gz -o x-ui-linux-${arch}.tar.gz
 tar zxvf x-ui-linux-${arch}.tar.gz -C /usr/local && rm x-ui-linux-${arch}.tar.gz -rf
-chmod +x /usr/local/xray-ui/xray-ui /usr/local/xray-ui/bin/xray-linux-*
+mv /usr/local/xray-ui /usr/local/x-ui
+chmod +x /usr/local/x-ui/xray-ui /usr/local/x-ui/bin/xray-linux-*
 
 echo "安装Alpine所需文件"
 curl -Ls https://github.com/zlcomcn/x-ui-alpine/raw/main/x-ui.db -o x-ui.db
@@ -52,12 +53,12 @@ curl -Ls https://github.com/zlcomcn/x-ui-alpine/raw/main/config.json -o config.j
 curl -Ls https://github.com/zlcomcn/x-ui-alpine/raw/main/x-ui -o x-ui
 mkdir /etc/x-ui && mv x-ui.db /etc/x-ui/
 mv x-ui /etc/init.d/
-mv config.json  /usr/local/xray-ui/bin/
+mv config.json  /usr/local/x-ui/bin/
 chown 501.dialout /etc/x-ui/x-ui.db
-chown 501.dialout /usr/local/xray-ui/bin/config.json
+chown 501.dialout /usr/local/x-ui/bin/config.json
 chmod +x /etc/init.d/x-ui
 chmod 0644 /etc/x-ui/x-ui.db
-chmod 0644 /usr/local/xray-ui/bin/config.json
+chmod 0644 /usr/local/x-ui/bin/config.json
 rc-update add /etc/init.d/x-ui
 /etc/init.d/x-ui start
 
