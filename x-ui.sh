@@ -5,9 +5,9 @@ red='\033[31m\033[01m'
 green='\033[32m\033[01m'
 yellow='\033[33m\033[01m'
 plain='\033[0m'
-echo "#############################################################"
-echo -e "#                   ${green}Alpine安装x-ui一键脚本                  #"
-echo -e "# ${GREEN}作者${PLAIN}: vaxilu, qist                     #"
+echo -e "#############################################################"
+echo -e "#                   ${green}Alpine安装x-ui一键脚本${plain}                  #"
+echo -e "#                   ${green}作者${plain}: vaxilu, qist                      #"
 echo "#############################################################"
 echo -e "系统: ${GREEN} $(grep -i pretty_name /etc/os-release 2>/dev/null | cut -d \" -f2) ${PLAIN}"
 echo -e "${red}"
@@ -41,7 +41,7 @@ if [[ -z "$last_version" ]]; then
         exit 1
     fi
 fi
-yellow "检测到 x-ui 最新版本：${last_version}，开始安装"
+echo -e "${yellow}检测到 x-ui 最新版本：${last_version}，开始安装${plain}"
 curl -Ls https://github.com/qist/xray-ui/releases/download/${last_version}/xray-ui-linux-${arch}.tar.gz -o x-ui-linux-${arch}.tar.gz
 tar zxvf x-ui-linux-${arch}.tar.gz -C /usr/local && rm x-ui-linux-${arch}.tar.gz -rf
 chmod +x /usr/local/x-ui/x-ui /usr/local/x-ui/bin/xray-linux-* /usr/local/x-ui/x-ui.sh
