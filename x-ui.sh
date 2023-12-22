@@ -7,11 +7,11 @@ yellow='\033[33m\033[01m'
 plain='\033[0m'
 echo "#############################################################"
 echo -e "#                   ${green}Alpine安装x-ui一键脚本                  #"
-echo -e "# ${GREEN}作者${PLAIN}: vaxilu, FranzKafkaYu, Misaka No                     #"
+echo -e "# ${GREEN}作者${PLAIN}: vaxilu, qist                     #"
 echo "#############################################################"
 echo -e "系统: ${GREEN} $(grep -i pretty_name /etc/os-release 2>/dev/null | cut -d \" -f2) ${PLAIN}"
 echo -e "${red}"
-read -p "回车键继续..."
+read -p "回车键开始安装..."
 echo -e "${plain}"
 
 echo "检查安装环境"
