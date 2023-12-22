@@ -7,7 +7,7 @@ yellow='\033[33m\033[01m'
 plain='\033[0m'
 echo -e "#############################################################"
 echo -e "#                   ${green}Alpine安装x-ui一键脚本${plain}                  #"
-echo -e "#                   ${green}作者${plain}: vaxilu, 4xmen                      #"
+echo -e "#                  ${green}作者${plain}: vaxilu,Misaka-blog                 #"
 echo "#############################################################"
 echo -e "系统: ${GREEN} $(grep -i pretty_name /etc/os-release 2>/dev/null | cut -d \" -f2) ${PLAIN}"
 echo -e "${red}"
