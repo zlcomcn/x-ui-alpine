@@ -46,17 +46,17 @@ tar zxvf x-ui-linux-${arch}.tar.gz -C /usr/local && rm x-ui-linux-${arch}.tar.gz
 chmod +x /usr/local/x-ui/x-ui /usr/local/x-ui/bin/xray-linux-*
 
 echo "安装Alpine所需文件"
-# curl -Ls https://github.com/zlcomcn/x-ui-alpine/raw/main/x-ui.db -o x-ui.db
-# curl -Ls https://github.com/zlcomcn/x-ui-alpine/raw/main/config.json -o config.json
+curl -Ls https://github.com/zlcomcn/x-ui-alpine/raw/main/x-ui.db -o x-ui.db
+curl -Ls https://github.com/zlcomcn/x-ui-alpine/raw/main/config.json -o config.json
 curl -Ls https://github.com/zlcomcn/x-ui-alpine/raw/main/x-ui -o x-ui
-# mkdir /etc/x-ui && mv x-ui.db /etc/x-ui/
+mkdir /etc/x-ui && mv x-ui.db /etc/x-ui/
 mv x-ui /etc/init.d/
-# mv config.json  /usr/local/x-ui/bin/
-# chown 501.dialout /etc/x-ui/x-ui.db
-# chown 501.dialout /usr/local/x-ui/bin/config.json
+mv config.json  /usr/local/x-ui/bin/
+chown 501.dialout /etc/x-ui/x-ui.db
+chown 501.dialout /usr/local/x-ui/bin/config.json
 chmod +x /etc/init.d/x-ui
-# chmod 0644 /etc/x-ui/x-ui.db
-# chmod 0644 /usr/local/x-ui/bin/config.json
+chmod 0644 /etc/x-ui/x-ui.db
+chmod 0644 /usr/local/x-ui/bin/config.json
 rc-update add /etc/init.d/x-ui
 /etc/init.d/x-ui start
 
