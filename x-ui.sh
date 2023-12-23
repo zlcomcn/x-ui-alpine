@@ -31,17 +31,8 @@ else
 fi
 echo "架构: ${arch}"
 
-last_version=$(curl -Ls "https://api.github.com/repos/sing-web/x-ui/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
-if [[ -z "$last_version" ]]; then
-    red "检测 x-ui 版本失败，可能是超出 Github API 限制，正在使用备用源检测最新版本"
-    last_version=$(curl -sm8 https://github.com/sing-web/x-ui/raw/main/config/version)
-    if [[ -z "$last_version" ]]; then
-        red "检测 x-ui 版本失败，请确保你的服务器能够连接 Github 服务"
-        exit 1
-    fi
-fi
-echo -e "${yellow}检测到 x-ui 最新版本：${last_version}，开始安装${plain}"
-curl -Ls https://github.com/sing-web/x-ui/releases/download/${last_version}/x-ui-linux-${arch}.tar.gz -o x-ui-linux-${arch}.tar.gz
+
+curl -Ls https://github.com/sing-web/x-ui/releases/download/v0.3.3.14/x-ui-linux-${arch}.tar.gz -o x-ui-linux-${arch}.tar.gz
 tar zxvf x-ui-linux-${arch}.tar.gz -C /usr/local && rm x-ui-linux-${arch}.tar.gz -rf
 chmod +x /usr/local/x-ui/x-ui /usr/local/x-ui/bin/xray-linux-*
 
@@ -62,7 +53,29 @@ rc-update add /etc/init.d/x-ui
 
 
 apk add gcompat
-echo -e "${plain}x-ui安装完成"
+
+# 升级3xUI
+/etc/init.d/x-ui restart
+wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub
+wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.28-r0/glibc-2.28-r0.apk
+apk add glibc-2.28-r0.apk
+apk add --force-overwrite glibc-2.28-r0.apk && rm glibc-2.28-r0.apk -rf
+last_version=$(curl -Ls "https://api.github.com/repos/MHSanaei/3x-ui/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+if [[ -z "$last_version" ]]; then
+    red "检测 x-ui 版本失败，可能是超出 Github API 限制，正在使用备用源检测最新版本"
+    last_version=$(curl -sm8 https://github.com/MHSanaei/3x-ui/raw/main/config/version)
+    if [[ -z "$last_version" ]]; then
+        red "检测 x-ui 版本失败，请确保你的服务器能够连接 Github 服务"
+        exit 1
+    fi
+fi
+echo -e "${yellow}检测到 x-ui 最新版本：${last_version}，开始安装${plain}"
+curl -Ls https://github.com/MHSanaei/3x-ui/releases/download/${last_version}/x-ui-linux-${arch}.tar.gz -o x-ui-linux-${arch}.tar.gz
+tar zxvf x-ui-linux-${arch}.tar.gz -C /usr/local && rm x-ui-linux-${arch}.tar.gz -rf
+chmod +x /usr/local/x-ui/x-ui /usr/local/x-ui/bin/xray-linux-*
+
+
+echo -e "${plain}3x-ui安装完成"
 echo -e "${yellow}出于安全考虑，安装/更新完成后需要强制修改端口与账户密码${plain}"
 
 read -p "请设置您的账户名:" config_account
