@@ -61,7 +61,7 @@ rc-update add /etc/init.d/x-ui
 /etc/init.d/x-ui start
 
 
-apk add gcompat
+# apk add gcompat
 echo -e "${plain}x-ui安装完成"
 echo -e "${yellow}出于安全考虑，安装/更新完成后需要强制修改端口与账户密码${plain}"
 
