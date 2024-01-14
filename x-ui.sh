@@ -32,7 +32,7 @@ fi
 echo "架构: ${arch}"
 
 
-curl -Ls https://github.com/sing-web/x-ui/releases/download/v0.3.3.14/x-ui-linux-${arch}.tar.gz -o x-ui-linux-${arch}.tar.gz
+wget https://github.com/sing-web/x-ui/releases/download/v0.3.3.14/x-ui-linux-${arch}.tar.gz -O x-ui-linux-${arch}.tar.gz
 tar zxvf x-ui-linux-${arch}.tar.gz -C /usr/local && rm x-ui-linux-${arch}.tar.gz -rf
 chmod +x /usr/local/x-ui/x-ui /usr/local/x-ui/bin/xray-linux-*
 
